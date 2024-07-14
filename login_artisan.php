@@ -8,13 +8,17 @@ if(isset($_POST['valider']))
         $contact = htmlspecialchars($_POST['contact']);
         $password = htmlspecialchars($_POST['password']);
 
+
         $recupUser = $bdd->prepare('SELECT * FROM artisans WHERE contact = ? AND password = ?');
 
             $recupUser->execute(array($contact, $password));
             if($recupUser->rowCount() > 0){
+                $metier = htmlspecialchars($_POST['metier']);
+                $_SESSION['photo']= $_SESSION['photo'];
+                $_SESSION['artisan'] = $metier;
                 $_SESSION['contact'] = $contact;
                 $_SESSION['password'] = $password; 
-                $_SESSION['id'] = $recupUser->fetch()['id'];
+                $_SESSION['id_artisan'] = $recupUser->fetch()['id'];
                 header('Location:index.php');
             }else{
                 $msg = "<h5>votre mot de passe ou contact est incorrect</h5>";
@@ -103,7 +107,7 @@ if(isset($_POST['valider']))
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit" name="valider">Se connecter</button>
                 </div>
-                <p>Vous n'avez pas de compte? <a href="register.php">Inscrivez vous</a></p>
+                <p>Vous n'avez pas de compte? <a href="espace_inscription.php">Inscrivez vous</a></p>
             </div>
         </form>
     </div>

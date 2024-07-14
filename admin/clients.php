@@ -69,7 +69,7 @@
               <?php
               }else{
                     ?>
-                      <h3 class="text-danger text-center">Aucun résultat pour: <span class="text-primary"><?= $search ?></span></h3>
+                      <h3 class="text-danger text-center">Aucun résultat</h3>
                     <?php
                   }
         ?>

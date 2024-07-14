@@ -1,6 +1,15 @@
 
 <?php include "head.php" ?>
 <?php
+if(isset($_POST['delete_category']))
+{
+    $id = $_GET['id'];
+    $deleteCategory = $bdd->prepare("DELETE FROM category WHERE id = ?");
+
+    $deleteCategory->execute(array($id));
+
+    $msg = 'Catégorie supprimé avec succès';
+}
 if(isset($_POST['valider']))
 {
   if(isset($_POST['title']))
@@ -17,7 +26,13 @@ if(isset($_POST['valider']))
     }
   }
 }
+
     $recupCategory = $bdd->query('SELECT * FROM category');
+    if(!empty($_GET['search']))
+      {
+            $search = htmlspecialchars($_GET['search']);
+            $recupCategory = $bdd->query("SELECT * FROM category WHERE title LIKE '%$search%' ORDER BY id DESC");
+      }
  ?>
 <div class="col-lg-10 offset-lg-2">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -79,8 +94,8 @@ if(isset($_POST['valider']))
             <tr>
               <td><strong><?= $category['title'] ?></strong></td>
               <td>
-                <form action="" method="POST">
-                  <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
+                <form action="?id=<?= $category['id']?>" method="POST">
+                  <button name="delete_category" class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
                 </form>
               </td>
             </tr>
@@ -91,7 +106,7 @@ if(isset($_POST['valider']))
               <?php
               }else{
                     ?>
-                      <h3 class="text-danger text-center">Aucun résultat pour: <span class="text-primary"><?= $search ?></span></h3>
+                      <h3 class="text-danger text-center">Aucun résultat</h3>
                     <?php
                   }
         ?>

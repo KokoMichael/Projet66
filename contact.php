@@ -1,3 +1,7 @@
+<?php
+session_start();
+require "config.php";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -27,14 +31,14 @@
 </head>
 
 <body>
-  <?php require "base/header.php"; ?>
+  <?php include "base/header.php"; ?>
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option" style="margin-top:100px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a href="index.php"><i class="fa fa-home"></i> ACCUEIL</a>
                         <span>Contact</span>
                     </div>
                 </div>
@@ -53,11 +57,11 @@
                             <h5>Contact info</h5>
                             <ul>
                                 <li>
-                                    <h6><i class="fa fa-map-marker"></i> Address</h6>
-                                    <p>160 Pennsylvania Ave NW, Washington, Castle, PA 16101-5161</p>
+                                    <h6><i class="fa fa-map-marker"></i> Addresse</h6>
+                                    <p>Cote d'ivoire, Abidjan</p>
                                 </li>
                                 <li>
-                                    <h6><i class="fa fa-phone"></i> Phone</h6>
+                                    <h6><i class="fa fa-phone"></i> Téléphone</h6>
                                     <p><span>125-711-811</span><span>125-668-886</span></p>
                                 </li>
                                 <li>

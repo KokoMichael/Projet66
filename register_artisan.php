@@ -132,7 +132,7 @@ if(isset($_POST['valider']))
                 </div>
                 <div class="form-group">
                     <label for="">Contact</label>
-                    <input name='contact' placeholder="Contact" type="text" class="form-control" required>
+                    <input name='contact' maxlength="10" placeholder="Contact" type="number" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="">Sexe</label>
@@ -144,24 +144,50 @@ if(isset($_POST['valider']))
                 </div>
                 <div class="form-group">
                     <label for="">Date de naissance</label>
-                    <input name='datenaissance' placeholder="Date de naissance" type="date" class="form-control">
+                    <input name='datenaissance'  min="1960-01-01" max="2012-01-01" placeholder="Date de naissance" type="date" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="localisation">Localisation</label>
                     <select name="localisation" id="" class="form-control" required>
+                        <option value=""></option>
                         <option value="ABIDJAN">ABIDJAN</option>
-                        <option value="DIVO">DIVO</option>
+                        <option value="GRAND BASSAM">GRAND BASSAM</option>
+                        <option value="YAMOUSSOUKRO">YAMOUSSOUKRO</option>
+                        <option value="BOUAKE">BOUAKE</option>
+                        <option value="DALOA">DALOA</option>
+                        <option value="KORHOGO">KORHOGO</option>
                         <option value="MAN">MAN</option>
+                        <option value="SAN-PEDRO">SAN-PEDRO</option>
+                        <option value="DIVO">DIVO</option>
+                        <option value="GAGNOA">GAGNOA</option>
+                        <option value="BONDOUKOU">BONDOUKOU</option>
+                        <option value="AUTRES">AUTRES</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="metier">Metier</label>
                     <select name="metier" id="" class="form-control" required>
-                        <option value=""></option>
-                        <option value="COIFFEUR(SE)">COIFFEUR/SE</option>
-                        <option value="PARTISIER(E)">PARTISIER(E)</option>
-                        <option value="MECANICIEN(NE)">MECANICIEN(NE)</option>
-                        <option value="MENUISIER(E)">MENUISIER(E)</option>
+                    <option value=""></option>
+                    <option value="Mécanique">Mécanique</option>
+                    <option value="Menuiserie">Menuiserie</option>
+                    <option value="Charpenterie">Charpenterie</option>
+                    <option value="Maçonnerie">Maçonnerie</option>
+                    <option value="Spécialiste en froid">Spécialiste en froid</option>
+                    <option value="Couture">Couture</option>
+                    <option value="Tapisserie">Tapisserie</option>
+                    <option value="Coiffure">Coiffure</option>
+                    <option value="Bijouterie">Bijouterie</option>
+                    <option value="Electronique (réparateur TV, portable, etc)">Electronique (réparateur TV, portable, etc)</option>
+                    <option value="Briqueterie">Briqueterie</option>
+                    <option value="Boucherie">Boucherie</option>
+                    <option value="Vente de marchandises">Vente de marchandises</option>
+                    <option value="Agroalimentaire, alimentation, restauration ">Agroalimentaire, alimentation, restauration</option>
+                    <option value="Vitrerie">Vitrerie</option>
+                    <option value="Hygiène et soins corporels">Hygiène et soins corporels</option>
+                    <option value="Audiovisuel et communication">Audiovisuel et communication</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Artisanat d’art et de décoration">Artisanat d’art et de décoration</option>
+                    <option value="AUTRES">AUTRES</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -189,7 +215,7 @@ if(isset($_POST['valider']))
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit" name="valider">S'inscrire</button>
                 </div>
-                <p>Avez vous déja un compte ? <a href="login.php">Connectez vous</a></p>
+                <p>Avez vous déja un compte ? <a href="espace_connexion.php">Connectez vous</a></p>
         </form>
         </div>
     </div>

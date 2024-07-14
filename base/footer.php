@@ -6,7 +6,7 @@
                 <div class="instagram__item set-bg" data-setbg="img/medium-shot-black-woman-running-small-business.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-facebook"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="#">@ artisan_connect</a>
                     </div>
                 </div>
             </div>
@@ -14,7 +14,7 @@
                 <div class="instagram__item set-bg" data-setbg="img/woman-hairdresser-salon.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-facebook"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="#">@ artisan_connect</a>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="instagram__item set-bg" data-setbg="img/ouvrier-du-batiment.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-facebook"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="#">@ artisan_connect</a>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="instagram__item set-bg" data-setbg="img/close-up-man-working-computer-chips.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-facebook"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="#">@ artisan_connect</a>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <div class="instagram__item set-bg" data-setbg="img/ecofriendly-shopping-with-phone.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-facebook"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="#">@ artisan_connect</a>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <div class="instagram__item set-bg" data-setbg="img/medium-shot-smiley-woman-market.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-facebook"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="#">@ artisan_connect</a>
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
             <div class="h-100 d-flex align-items-center justify-content-center">
                 <div class="search-close-switch">+</div>
                 <form class="search-model-form" method="get">
-                    <input type="text" name="search" value="" id="search-input" placeholder="Search here.....">
+                    <input type="text" name="search" value="" id="search-input" placeholder="Recherche ici.....">
                 </form>
             </div>
         </div>

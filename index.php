@@ -1,4 +1,5 @@
 <?php 
+
 session_start();
 require "config.php";
 
@@ -36,6 +37,11 @@ require "config.php";
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <style>
+        .product__item__pic{
+            border-radius:10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,8 +53,7 @@ require "config.php";
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <span>Shop</span>
+                        <a href="index.php"><i class="fa fa-home"></i> ACCUEIL</a>
                     </div>
                 </div>
             </div>
@@ -64,7 +69,7 @@ require "config.php";
                     <div class="shop__sidebar">
                         <div class="sidebar__categories">
                             <div class="section-title">
-                                <h4>Categories</h4>
+                                <h4>FILTRE</h4>
                             </div>
                             <div class="categories__accordion">
                                 <div class="accordion" id="accordionExample">
@@ -77,9 +82,17 @@ require "config.php";
                                             <select name="search" id="" class="form-control">
                                                 <option value=""></option>
                                                 <option value="ABIDJAN">ABIDJAN</option>
-                                                <option value="DALOA">DALOA</option>
+                                                <option value="GRAND BASSAM">GRAND BASSAM</option>
+                                                <option value="YAMOUSSOUKRO">YAMOUSSOUKRO</option>
                                                 <option value="BOUAKE">BOUAKE</option>
-                                                <option value=""></option>
+                                                <option value="DALOA">DALOA</option>
+                                                <option value="KORHOGO">KORHOGO</option>
+                                                <option value="MAN">MAN</option>
+                                                <option value="SAN-PEDRO">SAN-PEDRO</option>
+                                                <option value="DIVO">DIVO</option>
+                                                <option value="GAGNOA">GAGNOA</option>
+                                                <option value="BONDOUKOU">BONDOUKOU</option>
+                                                <option value="AUTRES">AUTRES</option>
                                             </select>
                                             <div class="card">
                                                 <div class="card-body">
@@ -97,10 +110,26 @@ require "config.php";
                                             <form action="" method="get">
                                                 <select name="search" id="" class="form-control">
                                                     <option value=""></option>
-                                                    <option value="PARTISIER">PARTISIER</option>
-                                                    <option value="COUTURIER">COUTURIER</option>
-                                                    <option value="MENUSIER">MENUSIER</option>
-                                                    <option value=""></option>
+                                                    <option value="Mécanique">Mécanique</option>
+                                                    <option value="Menuiserie">Menuiserie</option>
+                                                    <option value="Charpenterie">Charpenterie</option>
+                                                    <option value="Maçonnerie">Maçonnerie</option>
+                                                    <option value="Spécialiste en froid">Spécialiste en froid</option>
+                                                    <option value="Couture">Couture</option>
+                                                    <option value="Tapisserie">Tapisserie</option>
+                                                    <option value="Coiffure">Coiffure</option>
+                                                    <option value="Bijouterie">Bijouterie</option>
+                                                    <option value="Electronique (réparateur TV, portable, etc)">Electronique (réparateur TV, portable, etc)</option>
+                                                    <option value="Briqueterie">Briqueterie</option>
+                                                    <option value="Boucherie">Boucherie</option>
+                                                    <option value="Vente de marchandises">Vente de marchandises</option>
+                                                    <option value="Agroalimentaire, alimentation, restauration ">Agroalimentaire, alimentation, restauration</option>
+                                                    <option value="Vitrerie">Vitrerie</option>
+                                                    <option value="Hygiène et soins corporels">Hygiène et soins corporels</option>
+                                                    <option value="Audiovisuel et communication">Audiovisuel et communication</option>
+                                                    <option value="Transport">Transport</option>
+                                                    <option value="Artisanat d’art et de décoration">Artisanat d’art et de décoration</option>
+                                                    <option value="AUTRES">AUTRES</option>
                                                 </select>
                                                 <div class="card">
                                                     <div class="card-body">
@@ -169,7 +198,7 @@ require "config.php";
                      <?php
                         }else{
                             ?>
-                                <h3 class="text-danger text-center">Aucun résultat pour: <span class="text-primary"><?= $search ?></span></h3>
+                                <h3 class="text-danger text-center">Aucun résultat</h3>
                             <?php
                         }
                         ?>

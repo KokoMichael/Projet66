@@ -3,7 +3,6 @@
 session_start();
 
 require ('config.php');
-
 if(isset($_POST['valider']))
 {
     if(isset($_POST['title']) && isset($_POST['subtitle']) && isset($_POST['prix']) && isset($_POST['stock']) && isset($_POST['description']) && isset($_FILES['image']) && isset($_POST['category_id']))
@@ -18,6 +17,7 @@ if(isset($_POST['valider']))
 
             if($deplacefichier)
             {
+                $artisanId = $_SESSION['id_artisan'];
                 $title = htmlspecialchars($_POST['title']);
                 $subtitle = htmlspecialchars($_POST['subtitle']);
                 $prix = htmlspecialchars($_POST['prix']);
@@ -25,9 +25,9 @@ if(isset($_POST['valider']))
                 $description = htmlspecialchars($_POST['description']);
                 $category_id = $_POST['category_id'];
 
-                $insertProduct = $bdd->prepare('INSERT INTO article(category_id,title, subtitle,prix,stock,description,image) VALUES(?,?,?,?,?,?,?)');
+                $insertProduct = $bdd->prepare('INSERT INTO article(artisan_id,category_id,title, subtitle,prix,stock,description,image) VALUES(?,?,?,?,?,?,?,?)');
 
-                $insertProduct = $insertProduct->execute(array($category_id,$title,$subtitle,$prix,$stock,$description,$newfilename));
+                $insertProduct = $insertProduct->execute(array($artisanId,$category_id,$title,$subtitle,$prix,$stock,$description,$newfilename));
 
                 $recupProduct = $bdd->prepare('SELECT * FROM article');
 
@@ -100,7 +100,7 @@ if(isset($_POST['valider']))
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href=""><i class="fa fa-home"></i> Home</a>
+                        <a href="index.php"><i class="fa fa-home"></i> ACCUEIL</a>
                         <span>CREER UN ARTICLE</span>
                     </div>
                 </div>

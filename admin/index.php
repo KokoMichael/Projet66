@@ -2,6 +2,11 @@
 
 <?php
     $recupArtisan = $bdd->query('SELECT * FROM artisans ORDER BY id DESC');
+    if(!empty($_GET['search']))
+        {
+            $search = htmlspecialchars($_GET['search']);
+            $recupArtisan = $bdd->query("SELECT * FROM artisans WHERE CONCAT(metier,localisation) LIKE '%$search%' ORDER BY id DESC");
+        }
  ?>
 
 <div class="col-lg-10 offset-lg-2">
@@ -69,7 +74,7 @@
               <?php
               }else{
                     ?>
-                      <h3 class="text-danger text-center">Aucun résultat pour: <span class="text-primary"><?= $search ?></span></h3>
+                      <h3 class="text-danger text-center">Aucun résultat</span></h3>
                     <?php
                   }
         ?>

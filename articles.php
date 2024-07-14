@@ -1,15 +1,29 @@
 <?php
-
 session_start();
-
 require ('config.php');
+
+$recupArticle = $bdd->query('SELECT * FROM article ORDER BY id DESC');
+        
+if(!empty($_GET['search']))
+{
+    $search = htmlspecialchars($_GET['search']);
+    $recupArticle = $bdd->query("SELECT * FROM article WHERE CONCAT(title,prix) LIKE '%$search%' ORDER BY id DESC");
+}
+
 
 if(isset($_POST['ajout']))
 {
-    if(isset($_POST['title']) && isset($_POST['prix']) && isset($_POST['quantity']) && isset($_POST['image']))
+    $title = htmlspecialchars($_POST['title']);
+    $recupProduct = $bdd->prepare('SELECT * FROM panier WHERE title = ?');
+
+    $recupProduct->execute(array($title));
+
+    if($recupProduct->rowCount() > 0)
     {
-        if(!empty($_POST['title']) && !empty($_POST['prix']) && !empty($_POST['quantity']) && !empty($_POST['image']))
-        {
+        $already = "L'article a déja été ajouté au panier";
+    }else
+    {                
+
                 $image = htmlspecialchars($_POST['image']);
                 $title = htmlspecialchars($_POST['title']);
                 $prix = htmlspecialchars($_POST['prix']);
@@ -19,13 +33,14 @@ if(isset($_POST['ajout']))
 
                 $duplicata = $insertProduct->execute(array($title,$prix,$quantity,$image));
 
+
+                
+
                 $msg = 'Article Ajouté au panier avec succès';
 
 
-        }else{
-            $msg = 'Veuillez complètez tous les champs';
-        }
     }
+
 }
 
 if(isset($_POST['delete_article']))
@@ -35,19 +50,20 @@ if(isset($_POST['delete_article']))
     
         $execute = $recupProduct->execute(array($id));
     
-        if($execute)
-        {
-            $msg = 'Article supprimé avec succès';
-        }
+            $supp = 'Article supprimé avec succès';
     }
 
-        $recupArticle = $bdd->query('SELECT * FROM article ORDER BY id DESC');
-        
-        if(!empty($_GET['search']))
+
+        if(isset($_GET['categorie']))
         {
-            $search = htmlspecialchars($_GET['search']);
-            $recupArticle = $bdd->query("SELECT * FROM article WHERE CONCAT(title,prix) LIKE '%$search%' ORDER BY id DESC");
+            $category_id = $_GET['categorie'];
+
+            $recupArticle = $bdd->prepare('SELECT * FROM article WHERE category_id = ? ');
+
+            $recupArticle->execute(array($category_id));
         }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -75,10 +91,15 @@ if(isset($_POST['delete_article']))
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <style>
+        #select{
+            width: 200px !important;
+        }
+    </style>
 </head>
 
 <body>
-  <?php include "base/header.php"; ?>
+<?php include "base/header.php"; ?>
     <!-- Header Section End -->
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option" style="margin-top:100px">
@@ -86,8 +107,8 @@ if(isset($_POST['delete_article']))
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="index.php"><i class="fa fa-home"></i> Home</a>
-                        <span>Shop</span>
+                        <a href="index.php"><i class="fa fa-home"></i> ACCUEIL</a>
+                        <span>ARTICLES</span>
                     </div>
                 </div>
             </div>
@@ -108,6 +129,32 @@ if(isset($_POST['delete_article']))
             <?php
         }
     ?>
+    <?php 
+        if(!empty($already))
+        {
+            ?>
+            <div class="container">
+                <div class="alert alert-danger">
+                    <button type="button" data-dismiss="alert" class="close">&times;</button>
+                    <?php echo $already; ?>
+                </div>
+            </div>
+            <?php
+        }
+    ?>
+    <?php 
+        if(!empty($supp))
+        {
+            ?>
+            <div class="container">
+                <div class="alert alert-danger">
+                    <button type="button" data-dismiss="alert" class="close">&times;</button>
+                    <?php echo $supp; ?>
+                </div>
+            </div>
+            <?php
+        }
+    ?>
 
     <!-- Shop Section Begin -->
     <section class="shop spad">
@@ -122,88 +169,18 @@ if(isset($_POST['delete_article']))
                             <div class="categories__accordion">
                                 <div class="accordion" id="accordionExample">
                                     <div class="card">
-                                        <div class="card-heading active">
-                                            <a data-toggle="collapse" data-target="#collapseOne">Women</a>
-                                        </div>
-                                        <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseTwo">Men</a>
-                                        </div>
-                                        <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseThree">Kids</a>
-                                        </div>
-                                        <div id="collapseThree" class="collapse" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseFour">Accessories</a>
-                                        </div>
-                                        <div id="collapseFour" class="collapse" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseFive">Cosmetic</a>
-                                        </div>
-                                        <div id="collapseFive" class="collapse" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
+                                        <div>
+                                            <option value=""></option>
+                                            <?php
+                                                $recupCategory = $bdd->query('SELECT * FROM category');
+
+                                                while($category = $recupCategory->fetch())
+                                                {
+                                                    ?>
+                                                    <a href="?categorie=<?= $category['id'] ?>" class="text-secondary">- <?= $category['title']; ?></a></br>
+                                                    <?php
+                                                }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -211,113 +188,27 @@ if(isset($_POST['delete_article']))
                         </div>
                         <div class="sidebar__filter">
                             <div class="section-title">
-                                <h4>Shop by price</h4>
+                                <h4>Filter par prix</h4>
                             </div>
-                            <div class="filter-range-wrap">
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="99"></div>
-                                <div class="range-slider">
-                                    <div class="price-input">
-                                        <p>Price:</p>
-                                        <input type="text" id="minamount">
-                                        <input type="text" id="maxamount">
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">Filter</a>
-                        </div>
-                        <div class="sidebar__sizes">
-                            <div class="section-title">
-                                <h4>Shop by size</h4>
-                            </div>
-                            <div class="size__list">
-                                <label for="xxs">
-                                    xxs
-                                    <input type="checkbox" id="xxs">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="xs">
-                                    xs
-                                    <input type="checkbox" id="xs">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="xss">
-                                    xs-s
-                                    <input type="checkbox" id="xss">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="s">
-                                    s
-                                    <input type="checkbox" id="s">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="m">
-                                    m
-                                    <input type="checkbox" id="m">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="ml">
-                                    m-l
-                                    <input type="checkbox" id="ml">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="l">
-                                    l
-                                    <input type="checkbox" id="l">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="xl">
-                                    xl
-                                    <input type="checkbox" id="xl">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="sidebar__color">
-                            <div class="section-title">
-                                <h4>Shop by size</h4>
-                            </div>
-                            <div class="size__list color__list">
-                                <label for="black">
-                                    Blacks
-                                    <input type="checkbox" id="black">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="whites">
-                                    Whites
-                                    <input type="checkbox" id="whites">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="reds">
-                                    Reds
-                                    <input type="checkbox" id="reds">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="greys">
-                                    Greys
-                                    <input type="checkbox" id="greys">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="blues">
-                                    Blues
-                                    <input type="checkbox" id="blues">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="beige">
-                                    Beige Tones
-                                    <input type="checkbox" id="beige">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="greens">
-                                    Greens
-                                    <input type="checkbox" id="greens">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="yellows">
-                                    Yellows
-                                    <input type="checkbox" id="yellows">
-                                    <span class="checkmark"></span>
-                                </label>
+                            <div>
+                                <form action="" method="get">
+                                <p>Prix : </p>
+                                <select name="search" id="" id="select" class="form-control">
+                                    <option value=""></option>
+                                    <option value="1000"><?= number_format(1000,2) ?></option>
+                                    <option value="2000"><?= number_format(2000,2) ?></option>
+                                    <option value="3000"><?= number_format(3000,2) ?></option>
+                                    <option value="5000"><?= number_format(5000,2) ?></option>
+                                    <option value="10000"><?= number_format(10000,2) ?></option>
+                                    <option value="20000"><?= number_format(20000,2) ?></option>
+                                    <option value="50000"><?= number_format(50000,2) ?></option>
+                                    <option value="100000"><?= number_format(100000,2) ?></option>
+                                    <option value="200000"><?= number_format(200000,2) ?></option>
+                                    <option value="500000"><?= number_format(500000,2) ?></option>
+                                    <option value="1000000"><?= number_format(1000000,2) ?></option>
+                                </select>
+                                    <br><br><button class="btn btn-default border-danger" type="submit">Filtrer</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -337,12 +228,23 @@ if(isset($_POST['delete_article']))
                                 <div class="product__item__pic set-bg" data-setbg="avatars/<?= $article['image'] ?>">
                                     <div class="label new">New</div>
                                     <ul class="product__hover">
-                                    <li><a href="edit.php?id=<?= $article['id']; ?>"><span class="icon_pencil-edit"></span></a></li>
-                                    <li>
-                                            <form action="?id=<?= $article['id']; ?>" method="post">
-                                                <button name="delete_article" type="submit" style="border:none;background-color:transparent"><a href="#"><span class="fa fa-trash"></span></a></button>
-                                            </form>
-                                        </li>
+                                        <?php if(isset($_SESSION['id_artisan'])): ?>
+                                        <?php
+                                        $artisanconnect = $_SESSION['id_artisan'];
+
+                                        if($article['artisan_id'] === $artisanconnect)
+                                        {
+                                            ?>
+                                            <li><a href="edit.php?id=<?= $article['id']; ?>"><span class="icon_pencil-edit"></span></a></li>
+                                            <li>
+                                                <form action="?id=<?= $article['id']; ?>" method="post">
+                                                    <button name="delete_article" type="submit" style="border:none;background-color:transparent"><a href="#"><span class="fa fa-trash"></span></a></button>
+                                                </form>
+                                            </li>
+                                            <?php
+                                        }
+                                        ?>
+                                        <?php endif; ?>
                                         <li><a href="avatars/<?= $article['image'] ?>" class="image-popup"><span class="arrow_expand"></span></a></li>
                                         <li>
                                             <form action="" method="post" enctype="multipart/form-data">
@@ -374,7 +276,7 @@ if(isset($_POST['delete_article']))
                        <?php
                       }else{
                         ?>
-                        <h3 class="text-danger text-center">Aucun résultat pour: <span class="text-primary"><?= $search ?></span></h3>
+                        <h3 class="text-danger text-center">Aucun résultat</h3>
                         <?php
                       }
                     ?>

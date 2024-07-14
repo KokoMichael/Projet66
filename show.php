@@ -4,10 +4,17 @@
 
     if(isset($_POST['ajout']))
 {
-    if(isset($_POST['title']) && isset($_POST['prix']) && isset($_POST['quantity']) && isset($_POST['image']))
+    $title = htmlspecialchars($_POST['title']);
+    $recupProduct = $bdd->prepare('SELECT * FROM panier WHERE title = ?');
+
+    $recupProduct->execute(array($title));
+
+    if($recupProduct->rowCount() > 0)
     {
-        if(!empty($_POST['title']) && !empty($_POST['prix']) && !empty($_POST['quantity']) && !empty($_POST['image']))
-        {
+        $msg = "L'article a déja été ajouté au panier";
+    }else
+    {
+
                 $image = htmlspecialchars($_POST['image']);
                 $title = htmlspecialchars($_POST['title']);
                 $prix = htmlspecialchars($_POST['prix']);
@@ -17,13 +24,16 @@
 
                 $duplicata = $insertProduct->execute(array($title,$prix,$quantity,$image));
 
+
+                
+
                 $msg = 'Article Ajouté au panier avec succès';
 
 
-        }else{
-            $msg = 'Veuillez complètez tous les champs';
-        }
+
+
     }
+
 }
 
     $id = $_GET['id'];
@@ -68,7 +78,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a href="index.php"><i class="fa fa-home"></i> ACCUEIL</a>
                         <span><?= $article['title']; ?></span>
                     </div>
                 </div>

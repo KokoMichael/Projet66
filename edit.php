@@ -76,7 +76,7 @@ if(isset($_POST['valider']))
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
-                    <a href="{{route('recherche.artisans')}}"><i class="fa fa-home"></i> Home</a>
+                    <a href="index.php"><i class="fa fa-home"></i> ACCUEIL</a>
                     <span><?= $article['title'] ?></span>
                 </div>
             </div>

@@ -1,0 +1,7 @@
+AuthName "Cette page est securise"
+AuthType Basic
+AuthUserFile "C:\xampp\htdocs\Projet66\admin\.htpasswd"
+
+<limit GET POST>
+Require valid-user
+</limit>

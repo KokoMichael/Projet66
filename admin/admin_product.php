@@ -3,6 +3,24 @@
 
 <?php
     $recupArticle = $bdd->query('SELECT * FROM article ORDER BY id DESC');
+    if(!empty($_GET['search']))
+        {
+            $search = htmlspecialchars($_GET['search']);
+            $recupArticle = $bdd->query("SELECT * FROM article WHERE CONCAT(title,prix) LIKE '%$search%' ORDER BY id DESC");
+        }
+
+    if(isset($_POST['delete_article']))
+    {
+        $id = $_GET['id'];
+        $deleteProduct = $bdd->prepare("DELETE FROM article WHERE id = ?");
+    
+        $execute = $deleteProduct->execute(array($id));
+    
+        if($execute)
+        {
+            $msg = 'Article supprimé avec succès';
+        }
+    }
  ?>
 
 <div class="col-lg-10 offset-lg-2">
@@ -58,8 +76,8 @@
               <td><?= $article['title']?></td>
               <td><strong><?= $article['subtitle']?></strong></td>
               <td>
-                <form action="" method="POST">
-                  <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
+                <form action="?id=<?= $article['id']?>" method="POST">
+                  <button name="delete_article" class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
                 </form>
               </td>
             </tr>
@@ -70,7 +88,7 @@
               <?php
               }else{
                     ?>
-                      <h3 class="text-danger text-center">Aucun résultat pour: <span class="text-primary"><?= $search ?></span></h3>
+                      <h3 class="text-danger text-center">Aucun résultat</h3>
                     <?php
                   }
         ?>

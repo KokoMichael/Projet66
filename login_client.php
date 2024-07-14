@@ -1,18 +1,20 @@
 <?php
 session_start();
 require 'config.php';
+
 if(isset($_POST['valider']))
 {
-    if(!empty($_POST['contact']) && !empty($_POST['password']) )
+    if(!empty($_POST['email']) && !empty($_POST['password']) )
     {
-        $contact = htmlspecialchars($_POST['contact']);
+        $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
 
-        $recupUser = $bdd->prepare('SELECT * FROM clients WHERE contact = ? AND password = ?');
+        $recupUser = $bdd->prepare('SELECT * FROM clients WHERE email = ? AND password = ?');
 
-            $recupUser->execute(array($contact, $password));
+            $recupUser->execute(array($email, $password));
             if($recupUser->rowCount() > 0){
-                $_SESSION['contact'] = $contact;
+                $_SESSION['photo'] = $_SESSION['photo'];
+                $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password; 
                 $_SESSION['id'] = $recupUser->fetch()['id'];
                 header('Location:index.php');
@@ -81,11 +83,11 @@ if(isset($_POST['valider']))
             <?php
         }
        ?>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="col-lg-8">
                 <div class="form-group">
-                    <label for="">Contact</label>
-                    <input name='contact' type="number" placeholder="Contact" class="form-control">
+                    <label for="">Email</label>
+                    <input name='email' type="text" placeholder="Email" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="">Mot de passe</label><br>
@@ -103,7 +105,7 @@ if(isset($_POST['valider']))
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit" name="valider">Se connecter</button>
                 </div>
-                <p>Vous n'avez pas de compte? <a href="register.php">Inscrivez vous</a></p>
+                <p>Vous n'avez pas de compte? <a href="espace_inscription.php">Inscrivez vous</a></p>
             </div>
         </form>
     </div>

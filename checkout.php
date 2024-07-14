@@ -41,8 +41,8 @@ if(!$_SESSION['contact'])
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <span>Shopping cart</span>
+                        <a href="index.php"><i class="fa fa-home"></i> ACCUEIL</a>
+                        <span>LA CAISSE</span>
                     </div>
                 </div>
             </div>

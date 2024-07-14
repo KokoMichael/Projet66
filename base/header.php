@@ -22,7 +22,7 @@
           </div>
           <div id="mobile-menu-wrap"></div>
           <div class="offcanvas__auth">
-          <?php if(!isset($_SESSION['contact'])):?>
+          <?php if(!isset($_SESSION['password'])):?>
             <a href="espace_connexion.php">Connexion</a>
             <a href="espace_inscription.php">Incription</a>   
           <?php else:?>
@@ -46,7 +46,14 @@
                           <ul>
                               <li class="active"><a href="index.php">ACCUEIL</a></li>
                               <li><a href="articles.php">ARTICLES</a></li>
+                              <?php
+                              if(isset($_SESSION['artisan']))
+                              {
+                                ?>
                               <li><a href="create_product.php">CREER UN ARTICLE</a></li>
+                                <?php
+                              }
+                               ?>
                             <li><a href="blog.php">Blog</a></li>
                             <li><a href="contact.php">Contact</a></li>
                           </ul>
@@ -55,7 +62,7 @@
                   <div class="col-lg-3">
                       <div class="header__right">
                           <div class="header__right__auth">
-                          <?php if(!isset($_SESSION['contact'])):?>
+                          <?php if(!isset($_SESSION['password'])):?>
                             <a href="espace_connexion.php">Connexion</a>
                             <a href="espace_inscription.php">Incription</a> 
                           <?php else:?>
@@ -67,14 +74,14 @@
                               <li><a href="shopCart.php"><span class="icon_bag_alt"></span>
                                 <div class="tip"><span class="bi-badge badge-fill"><?= count($c) ?></span></div>
                               </a></li>
-                              <?php if(!isset($_SESSION['contact'])):?>
+                              <?php if(!isset($_SESSION['photo'])):?>
                                 <li><a href="#"><img src="img/avatar.jpg" width="50" height="50" style="border-radius: 50%" alt=""></a></li>
                               <?php else:?>
                                 <?php
-                                if($_SESSION['contact'])
+                                if($_SESSION['photo'])
                                 {
                                     ?>
-                                        <li><a href="#"><img src="img/avatar.jpg" width="50" height="50" style="border-radius: 50%" alt=""></a></li>
+                                        <li><a href="#"><img src="photo_artisans/<?= $_SESSION['photo'] ?>" width="50" height="50" style="border-radius: 50%" alt=""></a></li>
                                     <?php
                                 }else{
                                     ?>

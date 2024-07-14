@@ -108,7 +108,7 @@ if(isset($_POST['delete_article']))
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="index.php"><i class="fa fa-home"></i> Home</a>
+                        <a href="index.php"><i class="fa fa-home"></i> ACCUEIL</a>
                         <span>Shop</span>
                     </div>
                 </div>
@@ -125,6 +125,19 @@ if(isset($_POST['delete_article']))
                 <div class="alert alert-success">
                     <button type="button" data-dismiss="alert" class="close">&times;</button>
                     <?php echo $msg; ?>
+                </div>
+            </div>
+            <?php
+        }
+    ?>
+    <?php 
+        if(!empty($already))
+        {
+            ?>
+            <div class="container">
+                <div class="alert alert-danger">
+                    <button type="button" data-dismiss="alert" class="close">&times;</button>
+                    <?php echo $already; ?>
                 </div>
             </div>
             <?php

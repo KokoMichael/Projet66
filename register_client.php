@@ -130,7 +130,7 @@ if(isset($_POST['valider']))
                 </div>
                 <div class="form-group">
                     <label for="">Contact</label>
-                    <input name='contact' placeholder="Contact" type="text" class="form-control" required>
+                    <input name='contact' placeholder="Contact" type="number" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="">Sexe</label>
@@ -147,9 +147,19 @@ if(isset($_POST['valider']))
                 <div class="form-group">
                     <label for="localisation">Localisation</label>
                     <select name="localisation" id="" class="form-control" required>
+                        <option value=""></option>
                         <option value="ABIDJAN">ABIDJAN</option>
-                        <option value="DIVO">DIVO</option>
+                        <option value="GRAND BASSAM">GRAND BASSAM</option>
+                        <option value="YAMOUSSOUKRO">YAMOUSSOUKRO</option>
+                        <option value="BOUAKE">BOUAKE</option>
+                        <option value="DALOA">DALOA</option>
+                        <option value="KORHOGO">KORHOGO</option>
                         <option value="MAN">MAN</option>
+                        <option value="SAN-PEDRO">SAN-PEDRO</option>
+                        <option value="DIVO">DIVO</option>
+                        <option value="GAGNOA">GAGNOA</option>
+                        <option value="BONDOUKOU">BONDOUKOU</option>
+                        <option value="AUTRES">AUTRES</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -177,7 +187,7 @@ if(isset($_POST['valider']))
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit" name="valider">S'inscrire</button>
                 </div>
-                <p>Avez vous déja un compte ? <a href="login.php">Connectez vous</a></p>
+                <p>Avez vous déja un compte ? <a href="espace_connexion.php">Connectez vous</a></p>
         </form>
         </div>
     </div>

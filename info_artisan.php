@@ -37,6 +37,10 @@ require "config.php";
         .table-responsive{
             border-radius:15px !important;
         }
+        #photo{
+            width: 200px;
+            height: 200px;
+        }
     </style>
 </head>
 
@@ -63,11 +67,12 @@ require "config.php";
                             ?>
                             <tbody>
                                 <tr class="text-dark">
-                                    <td><img src="photo_artisans/<?= $artisan['photo'] ?>" alt="" width="200" height="200"></td>
+                                    <td><img src="photo_artisans/<?= $artisan['photo'] ?>" id="photo" alt="" ></td>
                                     <td>
                                       <p><strong>Nom et Prénom :</strong> <?= $artisan['nom']?> <?= $artisan['prenom']?></p>
                                       <p><strong>Email:</strong> <?= $artisan['email']?></p>
-                                      <p><strong>Contact:</strong> <?= $artisan['contact']?></p>
+                                      <p><strong>Contact:</strong> <?= $artisan['contact'];?> </p>
+                                      <p><strong>Whatsapp: </strong><a href="https://wa.me/<?= $artisan['contact']; ?>" class="text-success" style="font-size:30px"><i class="fa fa-brands fa-whatsapp"></i></a></p>
                                       <p><strong>Localisation:</strong>: <?= $artisan['localisation']?></p>
                                       <p><strong>Métier:</strong> <?= $artisan['metier']?></p>
                                       <p><strong>Nationalité:</strong> <?= $artisan['nationalite']?></p>
